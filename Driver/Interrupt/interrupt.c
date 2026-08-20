@@ -3,15 +3,15 @@
 void Interrupt_Init(void)
 {
     enable_interrupts(INT_TIMER0);
-    enable_interrupts(INT_TIMER1);
+    enable_interrupts(INT_TIMER3);
     enable_interrupts(GLOBAL);
 }
 
 
-#INT_TIMER0
-void Timer0_isr(){
+#INT_TIMER3
+void Timer3_isr(){
    int8 s0, s1, s2;
-   set_timer0(65536 - 500); //500.2us = 1ms
+   set_timer3(65536 - 1000); 
    IR_Sensor_Read(&s0, &s1, &s2);
    g_S0 = s0;
    g_S1 = s1;
@@ -52,10 +52,10 @@ void Timer0_isr(){
    } else ctx.time.t_pi = 0;
 }
 
-#INT_TIMER1 HIGH
+#INT_TIMER0
 
-void Timer1_isr(){
-   set_timer1(65536 - 50);
+void Timer0_isr(){
+   set_timer0(65536 - 10);
    pwm_motor_count++;
    pwm_servo_count++;
    

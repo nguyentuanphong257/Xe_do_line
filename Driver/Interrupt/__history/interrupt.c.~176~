@@ -52,10 +52,8 @@ void Timer0_isr(){
    } else ctx.time.t_pi = 0;
 }
 
-volatile int1 flag = 0;
+#INT_TIMER1 HIGH
 
-#INT_TIMER1
-/*
 void Timer1_isr(){
    set_timer1(65536 - 50);
    pwm_motor_count++;
@@ -66,30 +64,15 @@ void Timer1_isr(){
       pwm_motor_count = 0;
    }
    
-   if (pwm_motor_count < 5)
-   {
-      output_low(MOTOR2);
-   } else output_high(MOTOR2);
-   
-   /*output_bit(MOTOR1, pwm_motor_count < left_duty);
+   output_bit(MOTOR1, pwm_motor_count < left_duty);
    output_bit(MOTOR2, pwm_motor_count < right_duty);
   
    if (pwm_servo_count >= SERVO_PERIOD_TICK) {
       pwm_servo_count = 0;
    }
    output_bit(SERVO , pwm_servo_count < servo_duty);
-   */
-   
-
-void Timer1_isr(){
-   set_timer1(65536 - 25);
-   pwm_motor_count++;
-   
-   if (pwm_motor_count >= 10)  //Fpwm_motor = 100kHz /10 = 10kHz
-   {
-      pwm_motor_count = 0;
-   }
-   output_bit(MOTOR2, pwm_motor_count < 5);
-   
-   
 }
+
+
+
+

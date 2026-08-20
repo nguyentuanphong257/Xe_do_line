@@ -5,15 +5,15 @@
 #device HIGH_INTS=TRUE
 //#include <stdio.h>
 
-#fuses INTRC_IO, NOWDT, NOLVP, PUT, NOBROWNOUT, NOPROTECT
+#fuses INTRC_IO, NOWDT, NOLVP, NOBROWNOUT
 #use delay(internal=32MHz)     //Fosc = 32MHz
 
 //#use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7)
 
 //define GPIO PIN_OUT
-#define     IR0_SENSOR        PIN_C4      //phai
+#define     IR0_SENSOR        PIN_C1      //phai
 #define     IR1_SENSOR        PIN_C2      //giua
-#define     IR2_SENSOR        PIN_C1      //trai
+#define     IR2_SENSOR        PIN_C4      //trai
 #define     PI_SENSOR         PIN_A3
 #define     BUTTON            PIN_C6
 #define     MOTOR1            PIN_C7
@@ -33,17 +33,17 @@
 #define     PI_UNBLOCKED            0
 #define     SERVO_PERIOD_TICK       400
 #define     MOTOR_MAX_DUTY          10
-#define     MOTOR_DUTY_FORWARD_3    8
-#define     MOTOR_DUTY_FORWARD_2    5
-#define     MOTOR_DUTY_FORWARD_1    2
+#define     MOTOR_DUTY_FORWARD_3    6
+#define     MOTOR_DUTY_FORWARD_2    2
+#define     MOTOR_DUTY_FORWARD_1    1
 #define     MOTOR_DUTY_BACKWARD     5
-#define     MOTOR_DUTY_TURNRIGHT    5  
+#define     MOTOR_DUTY_TURNRIGHT    4  
 #define     PI_CONFIRM_TIME         1000 //1s
-#define     LINE_ERR_TIMEOUT        1000 //1s
-#define     TIME_FORWARD_MAX        3000   //0.2s
-#define     TIME_RUN_MAX            10000 //10s
-#define     REVERSE_TIMEOUT         1000 //1s   
-#define     TURNRIGHT_MIN_TIME      1000 //0.5s
+#define     LINE_ERR_TIMEOUT        3000 //1s
+#define     TIME_FORWARD_MAX        50   //0.2s
+#define     TIME_RUN_MAX            3000 //10s
+#define     REVERSE_TIMEOUT         1000//1s   
+#define     TURNRIGHT_MIN_TIME      500 //0.5s
 
 extern volatile int16 pickup_timeout;
 extern volatile int16 drop_timeout;
@@ -130,10 +130,10 @@ extern volatile int8  g_button_checkpoint;
 
 //Function Driver layer
 void timer0_init ();
-void timer1_init ();
+void timer3_init ();
 void Interrupt_Init(void);
 void Timer0_isr();
-void Timer1_isr();
+void Timer3_isr();
 void Motor_Init(void);
 void Motor_Direct(MotorDirect_t direct);
 void Motor_SetLeftDuty(int8 duty);

@@ -35,7 +35,9 @@ void main()
    App_Init();
    while(TRUE)
    {
-   //printf("S0 = %d S1 = %d S2 = %d\r\n",g_S0,g_S1,g_S2);
+     printf("Hello\r\n");
+   printf("S0 = %d S1 = %d S2 = %d\r\n",g_S0,g_S1,g_S2);
+   printf("pwm_motor_count = %d\r\n",pwm_motor_count);
    //printf("left_duty = %d right_duty = %d",left_duty,right_duty);
    Sensor_State_Update();
    FSM_Run(&ctx);

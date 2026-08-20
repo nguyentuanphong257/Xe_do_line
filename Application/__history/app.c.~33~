@@ -8,7 +8,7 @@ void App_Init(void)
     LED_Init();
     RobotContext_Init(&ctx);
     timer0_init();
-    timer3_init();
+    timer1_init();
     Interrupt_Init();
     ServoService_Rotate(0);
 }

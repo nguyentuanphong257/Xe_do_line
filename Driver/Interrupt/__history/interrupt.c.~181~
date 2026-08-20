@@ -3,15 +3,15 @@
 void Interrupt_Init(void)
 {
     enable_interrupts(INT_TIMER0);
-    enable_interrupts(INT_TIMER1);
+    enable_interrupts(INT_TIMER3);
     enable_interrupts(GLOBAL);
 }
 
 
-#INT_TIMER0
-void Timer0_isr(){
+#INT_TIMER3
+void Timer3_isr(){
    int8 s0, s1, s2;
-   set_timer0(65536 - 500); //500.2us = 1ms
+   set_timer3(65536 - 1000); 
    IR_Sensor_Read(&s0, &s1, &s2);
    g_S0 = s0;
    g_S1 = s1;
@@ -52,10 +52,8 @@ void Timer0_isr(){
    } else ctx.time.t_pi = 0;
 }
 
-volatile int1 flag = 0;
+#INT_TIMER0
 
-#INT_TIMER1
-/*
 void Timer1_isr(){
    set_timer1(65536 - 50);
    pwm_motor_count++;
@@ -66,30 +64,15 @@ void Timer1_isr(){
       pwm_motor_count = 0;
    }
    
-   if (pwm_motor_count < 5)
-   {
-      output_low(MOTOR2);
-   } else output_high(MOTOR2);
-   
-   /*output_bit(MOTOR1, pwm_motor_count < left_duty);
+   output_bit(MOTOR1, pwm_motor_count < left_duty);
    output_bit(MOTOR2, pwm_motor_count < right_duty);
   
    if (pwm_servo_count >= SERVO_PERIOD_TICK) {
       pwm_servo_count = 0;
    }
    output_bit(SERVO , pwm_servo_count < servo_duty);
-   */
-   
-
-void Timer1_isr(){
-   set_timer1(65536 - 100);
-   pwm_motor_count++;
-   
-   if (pwm_motor_count >= 10)  //Fpwm_motor = 100kHz /10 = 10kHz
-   {
-      pwm_motor_count = 0;
-   }
-   output_bit(MOTOR2, pwm_motor_count < 5);
-   
-   
 }
+
+
+
+

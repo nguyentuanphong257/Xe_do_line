@@ -3,14 +3,14 @@
 
 void timer3_init (){
    setup_timer_3(T3_INTERNAL | T3_DIV_BY_8);
-   set_timer3(65536 - 1000); 
+   set_timer0(65536 - 1000);  //500.2us = 1ms
    clear_interrupt(INT_TIMER3);
 }
 
 void timer0_init (){
    setup_timer_0(T0_INTERNAL | T0_DIV_8);
-   set_timer0(65536 - 10);  //10.1us = 10us => Ftimer = 100kHz
-   clear_interrupt(INT_TIMER0);
+   set_timer1(65536 - 10);  //10.1us = 10us => Ftimer = 100kHz
+   clear_interrupt(INT_TIMER1);
 }
 
 

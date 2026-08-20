@@ -3,12 +3,12 @@
 
 #include <18F2685.h>
 #device HIGH_INTS=TRUE
-//#include <stdio.h>
+#include <stdio.h>
 
 #fuses INTRC_IO, NOWDT, NOLVP, NOBROWNOUT
 #use delay(internal=32MHz)     //Fosc = 32MHz
 
-//#use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7)
+#use rs232(baud=9600, xmit=PIN_C6, rcv=PIN_C7)
 
 //define GPIO PIN_OUT
 #define     IR0_SENSOR        PIN_C1      //phai
@@ -130,10 +130,10 @@ extern volatile int8  g_button_checkpoint;
 
 //Function Driver layer
 void timer0_init ();
-void timer1_init ();
+void timer3_init ();
 void Interrupt_Init(void);
 void Timer0_isr();
-void Timer1_isr();
+void Timer3_isr();
 void Motor_Init(void);
 void Motor_Direct(MotorDirect_t direct);
 void Motor_SetLeftDuty(int8 duty);

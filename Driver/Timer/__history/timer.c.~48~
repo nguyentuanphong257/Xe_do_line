@@ -3,7 +3,7 @@
 
 void timer3_init (){
    setup_timer_3(T3_INTERNAL | T3_DIV_BY_8);
-   set_timer3(65536 - 1000); 
+   set_timer0(65536 - 1000);  //500.2us = 1ms
    clear_interrupt(INT_TIMER3);
 }
 
