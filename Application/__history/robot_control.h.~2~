@@ -1,0 +1,22 @@
+#ifndef __ROBOT_CONTROL_H__
+#define __ROBOT_CONTROL_H__
+
+#include "../Config/config.h"
+
+/*************************************************
+                FUNCTION
+**************************************************/
+
+void Robot_Init(void);
+
+void Robot_Stop(void);
+
+void Robot_Forward(void);
+
+void Robot_Backward(void);
+
+void Robot_TurnLeft(void);
+
+void Robot_TurnRight(void);
+
+#endif

@@ -1,0 +1,10 @@
+#include "Config/config.h"
+
+
+void Function_Initialization(RobotContext_t *ctx)
+{
+    Motion_Stop();
+    LED_Green_On();
+    
+    ctx->state.current = STATE_LINE_FOLLOWING;
+}

@@ -1,0 +1,35 @@
+#include "Config/config.h"
+
+
+void State_LineFollow(RobotContext_t *ctx)
+{
+   int8 ir_current_state = 0;
+   
+   ir_current_state = (ctx->input.S2 << 2) | (ctx->input.S1 << 1) | (ctx->input.S0);
+   if (ir_current_state == 0b111){
+      if(ctx->time.t_err > LINE_ERR_TIMEOUT){
+         ctx->state.current = STATE_STOP;
+         return;
+      } else {
+         ir_current_state = ctx->input.ir_last_state;
+      }
+   }
+   switch (ir_current_state){
+      case 0b100:
+         Motion_Forward(80,50);
+         break;
+      case 0b110:
+         Motion_Forward(80,20);
+         break;
+      case 0b001:
+         Motion_Forward(50,80);
+         break;
+      case 0b011:
+         Motion_Forward(20,80);
+         break;
+      default:
+         Motion_Forward(80,80);
+         break;
+   }
+   ctx->input.ir_last_state = ir_current_state;
+}

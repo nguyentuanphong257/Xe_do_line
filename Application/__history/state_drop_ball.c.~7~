@@ -1,0 +1,22 @@
+#include "Config/config.h"
+
+
+void State_DropBall(RobotContext_t *ctx)
+{
+    Motion_Stop();
+
+    if(ctx->flag.servo_done == 0)
+    {
+        ServoService_Rotate(90);
+        ctx->flag.servo_done = 1;
+        return;
+    }
+
+    if(ctx->time.t_dropball > DROP_TIMEOUT)
+    {
+        ServoService_Rotate(0);
+        ctx->flag.servo_done = 0;
+        ctx->flag.drop_ball  = 1;
+        ctx->state.current = REVERSE;
+    }
+}

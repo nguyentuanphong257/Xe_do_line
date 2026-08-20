@@ -1,0 +1,57 @@
+#include "main.h"
+
+static void Reset_Flag(RobotContext_t *ctx)
+{
+    ctx->flag.pick_ball       = 0;
+    ctx->flag.pick_turn_flag  = 0;
+    ctx->flag.drop_ball       = 0;
+    ctx->flag.drop_turn_flag  = 0;
+    ctx->flag.round           = 1;
+    ctx->flag.servo_done      = 0;
+}
+
+void Function_TurnRight(RobotContext_t *ctx)
+{
+  //printf("Turn right\r\n");
+   Motion_TurnRight();
+
+   if(ctx->time.t_turnright < TURNRIGHT_MIN_TIME)
+   {
+       return;
+   }
+   
+   if (ctx->input.S0 == LINE_WHITE && ctx->input.S1 == LINE_WHITE && ctx->input.S2 == LINE_WHITE)
+   {
+      if (ctx->time.t_err > LINE_ERR_TIMEOUT)
+      {
+         ctx->time.t_turnright = 0;
+         ctx->state.current = STATE_OUT_LINE;
+         return;
+      } else return;
+   } 
+   else if (ctx->flag.drop_ball == 1 && ctx->flag.round == 0)
+   {
+      ctx->time.t_turnright = 0;
+      ctx->state.current = STATE_RETURN_TO_START;
+      ctx->flag.drop_turn_flag = 1;
+   }
+   else if (ctx->flag.drop_ball == 0)
+   {
+      ctx->time.t_turnright = 0;
+      ctx->state.current = STATE_LINE_FOLLOWING;
+      ctx->flag.pick_turn_flag = 1;
+   }
+   else if (ctx->flag.drop_ball == 1 && ctx->flag.round == 1 && ctx->flag.drop_turn_flag == 0) 
+   {
+      ctx->time.t_turnright = 0;
+      ctx->state.current = STATE_LINE_FOLLOWING;
+      ctx->flag.drop_turn_flag = 1;
+   }
+   else if  (ctx->flag.drop_ball == 1 && ctx->flag.round == 1 && ctx->flag.drop_turn_flag == 1)
+   {
+      ctx->time.t_turnright = 0;
+      ctx->state.current = STATE_LINE_FOLLOWING;
+      Reset_Flag(ctx);
+      LED_Green_On();
+   }
+}

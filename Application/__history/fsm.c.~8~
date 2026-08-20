@@ -1,0 +1,21 @@
+#include <config.h>
+
+void Reset_flags()
+{
+   while (1);
+}
+
+void state_Initialize(){
+   timer0_init();
+   timer1_init();
+   Reset_flags();
+   state = LINE_FOLLOWING;
+}
+
+void state_LineFollowing()
+{
+   if (PI_confirm())
+   {
+      
+   }
+}

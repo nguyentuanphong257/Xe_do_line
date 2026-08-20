@@ -1,0 +1,41 @@
+#include "ir_sensor.h"
+
+/*************************************************
+                INIT
+**************************************************/
+
+void IR_Sensor_Init(void)
+{
+    // Hi?n t?i GPIO_Input_Init() dã c?u hình TRIS.
+    // Chua c?n làm gì thêm.
+}
+
+/*************************************************
+                READ LINE STATE
+**************************************************/
+
+LineState_t IR_ReadState(void)
+{
+    int1 ir1;
+    int1 ir2;
+
+    ir1 = GPIO_ReadPin(IR1);
+    ir2 = GPIO_ReadPin(IR2);
+
+    if(ir1 == 0 && ir2 == 0)
+    {
+        return LINE_CENTER;
+    }
+
+    else if(ir1 == 0 && ir2 == 1)
+    {
+        return LINE_RIGHT;
+    }
+
+    else if(ir1 == 1 && ir2 == 0)
+    {
+        return LINE_LEFT;
+    }
+
+    return LINE_LOST;
+}

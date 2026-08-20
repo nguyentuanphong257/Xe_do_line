@@ -1,0 +1,11 @@
+#include "main.h"
+
+
+
+
+void IR_Sensor_Read(int1 *s0, int1 *s1, int1 *s2)
+{
+    *s0 = GPIO_ReadPin(IR0_SENSOR);
+    *s1 = GPIO_ReadPin(IR1_SENSOR);
+    *s2 = GPIO_ReadPin(IR2_SENSOR);
+}

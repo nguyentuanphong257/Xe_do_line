@@ -1,0 +1,14 @@
+#ifndef __GPIO_INPUT_H__
+#define __GPIO_INPUT_H__
+
+#include "../../Config/config.h"
+
+/*************************************************
+                FUNCTION
+**************************************************/
+
+void GPIO_Input_Init(void);
+
+int1 GPIO_ReadPin(int pin);
+
+#endif

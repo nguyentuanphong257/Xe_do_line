@@ -1,0 +1,22 @@
+#include "main.h"
+
+
+void Function_Reverse(RobotContext_t *ctx)
+{
+  //printf("Reverse\r\n");
+    Motion_Backward(MOTOR_DUTY_FORWARD_2,MOTOR_DUTY_FORWARD_2);
+
+    if(ctx->time.t_reverse > REVERSE_TIMEOUT)
+    {
+        Motion_Stop();
+        ctx->time.t_reverse = 0;
+        ctx->state.current = STATE_TURN_RIGHT;
+        return;
+    }
+    //if (ctx->time.t_err > LINE_ERR_TIMEOUT)
+      //{
+        // ctx->time.t_reverse = 0;
+         //ctx->state.current = STATE_OUT_LINE;
+         //return;
+      //}
+}

@@ -1,0 +1,7 @@
+#include "Config/config.h"
+
+
+int1 PI_Sensor_Read(void)
+{
+    return GPIO_ReadPin(PI_SENSOR);
+}

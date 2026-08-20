@@ -1,0 +1,120 @@
+ÀÄmain
+   ÃÄMAIN  0/106  Ram=0
+   ³  ÃÄ@cinit1  (Inline)  Ram=0
+   ³  ÃÄApp_Init  0/30  Ram=0
+   ³  ³  ÃÄGPIO_Init  0/26  Ram=0
+   ³  ³  ÃÄMotor_Init  0/24  Ram=0
+   ³  ³  ÃÄServo_Init  0/16  Ram=0
+   ³  ³  ³  ÀÄGPIO_WritePin  0/88  Ram=2
+   ³  ³  ³     ÃÄ@WRITEBITA  0/62  Ram=6
+   ³  ³  ³     ÀÄ@WRITEBITA  0/62  Ram=6
+   ³  ³  ÃÄLED_Init  0/18  Ram=0
+   ³  ³  ³  ÃÄGPIO_WritePin  0/88  Ram=2
+   ³  ³  ³  ³  ÀÄ*
+   ³  ³  ³  ÀÄGPIO_WritePin  0/88  Ram=2
+   ³  ³  ³     ÀÄ*
+   ³  ³  ÃÄRobotContext_Init  0/466  Ram=4
+   ³  ³  ÃÄtimer0_init  0/18  Ram=0
+   ³  ³  ÃÄtimer1_init  0/16  Ram=0
+   ³  ³  ÃÄInterrupt_Init  0/12  Ram=0
+   ³  ³  ÀÄServoService_Rotate  0/120  Ram=7
+   ³  ³     ÃÄ@MUL3232  0/86  Ram=14
+   ³  ³     ÃÄ@DIV3232  0/144  Ram=13
+   ³  ³     ÀÄServo_SetPulse  0/84  Ram=4
+   ³  ³        ÀÄ@DIV1616  0/68  Ram=5
+   ³  ÃÄSensor_State_Update  0/28  Ram=0
+   ³  ÀÄFSM_Run  0/176  Ram=2
+   ³     ÃÄFunction_Initialize  0/22  Ram=4
+   ³     ³  ÃÄMotion_Stop  0/20  Ram=0
+   ³     ³  ³  ÃÄMotor_Direct  0/88  Ram=1
+   ³     ³  ³  ÃÄMotor_SetLeftDuty  0/16  Ram=1
+   ³     ³  ³  ÀÄMotor_SetRightDuty  0/16  Ram=1
+   ³     ³  ÃÄLED_Green_On  0/10  Ram=0
+   ³     ³  ³  ÀÄGPIO_WritePin  0/88  Ram=2
+   ³     ³  ³     ÀÄ*
+   ³     ³  ÀÄLED_Red_Off  0/10  Ram=0
+   ³     ³     ÀÄGPIO_WritePin  0/88  Ram=2
+   ³     ³        ÀÄ*
+   ³     ÃÄFunction_LineFollow  0/306  Ram=7
+   ³     ³  ÃÄPI_Confirm  0/86  Ram=6
+   ³     ³  ÃÄMotion_Stop  0/20  Ram=0
+   ³     ³  ³  ÀÄ*
+   ³     ³  ÃÄMotion_Forward  0/22  Ram=2
+   ³     ³  ³  ÃÄMotor_Direct  0/88  Ram=1
+   ³     ³  ³  ÃÄMotor_SetLeftDuty  0/16  Ram=1
+   ³     ³  ³  ÀÄMotor_SetRightDuty  0/16  Ram=1
+   ³     ³  ÃÄMotion_Forward  0/22  Ram=2
+   ³     ³  ³  ÀÄ*
+   ³     ³  ÃÄMotion_Forward  0/22  Ram=2
+   ³     ³  ³  ÀÄ*
+   ³     ³  ÃÄMotion_Forward  0/22  Ram=2
+   ³     ³  ³  ÀÄ*
+   ³     ³  ÀÄMotion_Forward  0/22  Ram=2
+   ³     ³     ÀÄ*
+   ³     ÃÄFunction_PickBall  0/124  Ram=6
+   ³     ³  ÃÄMotion_Stop  0/20  Ram=0
+   ³     ³  ³  ÀÄ*
+   ³     ³  ÃÄLED_Red_Off  0/10  Ram=0
+   ³     ³  ³  ÀÄ*
+   ³     ³  ÃÄLED_Red_Toggle  0/8  Ram=0
+   ³     ³  ÀÄ@delay_ms1  0/40  Ram=1
+   ³     ÃÄFunction_Reverse  0/108  Ram=6
+   ³     ³  ÃÄMotion_Backward  0/26  Ram=2
+   ³     ³  ³  ÃÄMotor_Direct  0/88  Ram=1
+   ³     ³  ³  ÃÄMotor_SetLeftDuty  0/16  Ram=1
+   ³     ³  ³  ÀÄMotor_SetRightDuty  0/16  Ram=1
+   ³     ³  ÀÄMotion_Stop  0/20  Ram=0
+   ³     ³     ÀÄ*
+   ³     ÃÄFunction_TurnRight  0/654  Ram=6
+   ³     ³  ÃÄMotion_TurnRight  0/26  Ram=0
+   ³     ³  ³  ÃÄMotor_Direct  0/88  Ram=1
+   ³     ³  ³  ÃÄMotor_SetLeftDuty  0/16  Ram=1
+   ³     ³  ³  ÀÄMotor_SetRightDuty  0/16  Ram=1
+   ³     ³  ÃÄReset_Flag  0/88  Ram=4
+   ³     ³  ÀÄLED_Green_On  0/10  Ram=0
+   ³     ³     ÀÄ*
+   ³     ÃÄFunction_DropBall  0/178  Ram=6
+   ³     ³  ÃÄMotion_Stop  0/20  Ram=0
+   ³     ³  ³  ÀÄ*
+   ³     ³  ÃÄServoService_Rotate  0/120  Ram=7
+   ³     ³  ³  ÀÄ*
+   ³     ³  ÃÄServoService_Rotate  0/120  Ram=7
+   ³     ³  ³  ÀÄ*
+   ³     ³  ÀÄLED_Green_Off  0/14  Ram=0
+   ³     ³     ÀÄGPIO_WritePin  0/88  Ram=2
+   ³     ³        ÀÄ*
+   ³     ÃÄFunction_OutLine  0/32  Ram=4
+   ³     ³  ÀÄMotion_Stop  0/20  Ram=0
+   ³     ³     ÀÄ*
+   ³     ÃÄFunction_Checkpoint  0/194  Ram=4
+   ³     ÃÄFunction_ReturnToStart  0/718  Ram=7
+   ³     ³  ÃÄMotion_Forward  0/22  Ram=2
+   ³     ³  ³  ÀÄ*
+   ³     ³  ÃÄMotion_Forward  0/22  Ram=2
+   ³     ³  ³  ÀÄ*
+   ³     ³  ÃÄMotion_Forward  0/22  Ram=2
+   ³     ³  ³  ÀÄ*
+   ³     ³  ÃÄMotion_Forward  0/22  Ram=2
+   ³     ³  ³  ÀÄ*
+   ³     ³  ÃÄMotion_Forward  0/22  Ram=2
+   ³     ³  ³  ÀÄ*
+   ³     ³  ÀÄMotion_Forward  0/22  Ram=2
+   ³     ³     ÀÄ*
+   ³     ÀÄFunction_OutLine  0/32  Ram=4
+   ³        ÀÄ*
+   ÃÄTimer0_isr  0/270  Ram=3
+   ³  ÃÄIR_Sensor_Read  0/94  Ram=8
+   ³  ³  ÃÄGPIO_ReadPin  0/42  Ram=1
+   ³  ³  ³  ÃÄ@WRITEBITA  0/62  Ram=6
+   ³  ³  ³  ÀÄ@READBITA  0/48  Ram=5
+   ³  ³  ÃÄGPIO_ReadPin  0/42  Ram=1
+   ³  ³  ³  ÀÄ*
+   ³  ³  ÀÄGPIO_ReadPin  0/42  Ram=1
+   ³  ³     ÀÄ*
+   ³  ÃÄPI_Sensor_Read  0/12  Ram=0
+   ³  ³  ÀÄGPIO_ReadPin  0/42  Ram=1
+   ³  ³     ÀÄ*
+   ³  ÀÄButton_Read  0/12  Ram=1
+   ³     ÀÄGPIO_ReadPin  0/42  Ram=1
+   ³        ÀÄ*
+   ÀÄTimer1_isr  0/98  Ram=0

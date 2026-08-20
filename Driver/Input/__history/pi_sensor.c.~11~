@@ -1,0 +1,13 @@
+#include "Config/config.h"
+
+
+int1 PI_Sensor_Read(void)
+{
+    return GPIO_ReadPin(PI_SENSOR);
+}
+
+int1 PI_Confirm(RobotContext_t *ctx)
+{
+   if (ctx->input.PI_state != PI_UNBLOCKED) return 0;
+   if (ctx->time.t_pi > PI_CONFIRM_TIME) return 1;
+}

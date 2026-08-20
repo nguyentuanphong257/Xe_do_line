@@ -1,0 +1,24 @@
+#include "../../Config/config.h"
+
+/*************************************************
+                INIT
+    Cac chan BUTTON1, BUTTON2 da duoc cau hinh
+    input trong GPIO_Input_Init(), khong can
+    them gi o day.
+**************************************************/
+
+void Button_Init(void)
+{
+
+}
+
+/*************************************************
+                READ (RAW)
+    Dung chung cho ca BUTTON1 (start) va
+    BUTTON2 (checkpoint), truyen pin lam tham so.
+**************************************************/
+
+int1 Button_Read(int8 pin)
+{
+    return GPIO_ReadPin(pin);
+}

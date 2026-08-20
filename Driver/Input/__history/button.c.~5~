@@ -1,0 +1,14 @@
+#include "Config/config.h"
+
+
+void Button_Init(void)
+{
+
+}
+
+
+
+int1 Button_Read(int8 pin)
+{
+    return GPIO_ReadPin(pin);
+}

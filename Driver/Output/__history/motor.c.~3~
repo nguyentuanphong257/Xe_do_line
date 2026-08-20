@@ -1,0 +1,59 @@
+
+extern volatile int8 left_duty;
+extern volatile int8 right_duty;
+
+
+void Motor_Forward(void)
+{
+    output_high(ANT1);
+    output_low(ANT2);
+
+    output_high(BNT1);
+    output_low(BNT2);
+}
+
+
+void Motor_Backward(void)
+{
+    output_low(ANT1);
+    output_high(ANT2);
+
+    output_low(BNT1);
+    output_high(BNT2);
+}
+
+void Motor_Stop(void)
+{
+    output_low(ANT1);
+    output_low(ANT2);
+
+    output_low(BNT1);
+    output_low(BNT2);
+
+    left_duty = 0;
+    right_duty = 0;
+}
+
+/*************************************************
+                LEFT PWM
+**************************************************/
+
+void Motor_SetLeftDuty(int8 duty)
+{
+    if(duty > PWM_MAX_DUTY)
+        duty = PWM_MAX_DUTY;
+
+    left_duty = duty;
+}
+
+/*************************************************
+                RIGHT PWM
+**************************************************/
+
+void Motor_SetRightDuty(int8 duty)
+{
+    if(duty > PWM_MAX_DUTY)
+        duty = PWM_MAX_DUTY;
+
+    right_duty = duty;
+}

@@ -1,0 +1,47 @@
+volatile int8 pwm_count = 0;
+volatile int32 count_tick = 0;
+
+void timer0_init (){
+   setup_timer_0(T0_INTERNAL | T0_DIV_16);
+   set_timer0(65536 - 500);  //500.2us = 1ms
+   clear_interrupt(INT_TIMER0);
+   enable_interrupts(INT_TIMER0);
+}
+
+void timer1_init (){
+   setup_timer_1(T1_INTERNAL | T1_DIV_BY_2);
+   set_timer1(65536 - 10);  //10.1us = 10us
+   clear_interrupt(INT_TIMER1);
+   enable_interrupts(INT_TIMER1);
+}
+
+void timer0_isr(){
+   set_timer0(65536 - 500);
+   S[IR_LEFT] = input(IR1_SENSOR);
+   S[IR_CENTER] = input(IR2_SENSOR);
+   S[IR_RIGHT] = input(IR3_SENSOR);
+   PI = input(PI_SENSOR);
+   button_start = input(BUTTON1);
+   button_check = input(BUTTON2);
+   if (S[IR_LEFT] == 1 && S[IR_CENTER] == 1 && S[IR_RIGHT] == 1) {
+      t_err++;
+   } else t_err = 0;
+}
+
+void timer1_isr(){
+   set_timer0(65536 - 10);
+   pwm_count++;
+   if (pwm_count >= 10)  //Chu ky xung PWM = 10*0.2ms = 2ms =>FPWM = 500Hz
+   {
+      pwm_count = 0;
+   }
+   output_bit(Motor1, pwm_count < left_duty);
+   output_bit(Motor2, pwm_count < right_duty);
+}
+
+
+int32 get_tick(){
+   return count_tick;
+}
+
+

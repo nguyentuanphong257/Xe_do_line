@@ -1,0 +1,106 @@
+#include "main.h"
+
+void Interrupt_Init(void)
+{
+    enable_interrupts(INT_TIMER0);
+    enable_interrupts(INT_TIMER1);
+    enable_interrupts(GLOBAL);
+}
+
+
+#INT_TIMER0
+void Timer0_isr(){
+   int8 s0, s1, s2;
+   set_timer0(65536 - 500); //500.2us = 1ms
+   IR_Sensor_Read(&s0, &s1, &s2);
+   g_S0 = s0;
+   g_S1 = s1;
+   g_S2 = s2;
+   g_PI = PI_Sensor_Read();
+   g_button_checkpoint = Button_Read(BUTTON);
+   if (g_S0 == LINE_WHITE && g_S1 == LINE_WHITE && g_S2 == LINE_WHITE) 
+   {
+      ctx.time.t_err++;
+   } else ctx.time.t_err = 0;
+   switch (ctx.state.current) 
+   {
+      case STATE_PICK_BALL:
+         ctx.time.t_pickup++;
+         break;
+      case STATE_REVERSE:
+         ctx.time.t_reverse++;
+         break;
+      case STATE_DROP_BALL:
+         ctx.time.t_dropball++;
+         break;
+      case STATE_RETURN_TO_START:
+         ctx.time.t_run++;
+         if (g_S0 == LINE_BLACK && g_S1 == LINE_BLACK && g_S2 == LINE_BLACK)
+         {
+            ctx.time.t_forward++;
+         }
+         break;
+      case STATE_TURN_RIGHT:
+         ctx.time.t_turnright++;
+         break;
+      default:
+      
+   }
+   if (g_PI == PI_UNBLOCKED)
+   {
+      ctx.time.t_pi++;
+   } else ctx.time.t_pi = 0;
+}
+
+
+#INT_TIMER1
+/*
+void Timer1_isr(){
+   set_timer1(65536 - 50);
+   pwm_motor_count++;
+   pwm_servo_count++;
+   
+   if (pwm_motor_count >= 10)  //Fpwm_motor = 100kHz /10 = 10kHz
+   {
+      pwm_motor_count = 0;
+   }
+   
+   if (pwm_motor_count < 5)
+   {
+      output_low(MOTOR2);
+   } else output_high(MOTOR2);
+   
+   /*output_bit(MOTOR1, pwm_motor_count < left_duty);
+   output_bit(MOTOR2, pwm_motor_count < right_duty);
+  
+   if (pwm_servo_count >= SERVO_PERIOD_TICK) {
+      pwm_servo_count = 0;
+   }
+   output_bit(SERVO , pwm_servo_count < servo_duty);
+   */
+   volatile int16 time_count = 0;
+
+void Timer1_isr(){
+   set_timer1(65536 - 100);
+   pwm_servo_count++;
+   time_count++;
+   
+   if (pwm_servo_count >= SERVO_PERIOD_TICK) {
+      pwm_servo_count = 0;
+   }
+   
+   if (time_count == 0)
+   {
+      duty_servo = 10;
+   }
+   if (time_count = 10000)
+   {
+      duty_servo = 15;
+   }
+   
+   if (time_count >= 10000)
+   {
+      time_count = 0;
+   }
+   output_bit(SERVO , pwm_servo_count < duty_servo);
+}

@@ -1,0 +1,71 @@
+#include "../Config/config.h"
+
+/*************************************************
+                LOCAL VARIABLE
+**************************************************/
+
+// Mốc tick của lần gọi TimingService_Update() trước đó,
+// dùng để tính delta thời gian trôi qua giữa 2 vòng lặp main
+static int32 s_last_tick = 0;
+
+/*************************************************
+                LOCAL FUNCTION
+**************************************************/
+
+// Nếu "condition" đúng thì cộng dồn delta vào timer,
+// ngược lại reset timer về 0 (thoát điều kiện là mất hiệu lực đếm)
+static void Timing_Accumulate(int32 *timer, int1 condition, int32 delta)
+{
+    if(condition)
+    {
+        *timer += delta;
+    }
+    else
+    {
+        *timer = 0;
+    }
+}
+
+/*************************************************
+                IS TIMEOUT
+**************************************************/
+
+int1 Timing_IsTimeout(int32 t, int32 threshold)
+{
+    return (t >= threshold);
+}
+
+/*************************************************
+                UPDATE
+**************************************************/
+
+void TimingService_Update(RobotContext_t *ctx)
+{
+    int32 now;
+    int32 delta;
+
+    now   = Timer_GetTick();
+    delta = now - s_last_tick;
+    s_last_tick = now;
+
+    // t_err: thời gian xe lạc line (cả 3 cảm biến IR đều không thấy line)
+    Timing_Accumulate(&ctx->t_err, (ctx->S0 == 0 && ctx->S1 == 0 && ctx->S2 == 0), delta);
+
+    // t_PI: thời gian cảm biến PI bị chắn sáng liên tục (xe đang áp vào station)
+    Timing_Accumulate(&ctx->t_PI, (ctx->PI_state == 1), delta);
+
+    // t_pickup: chỉ đếm khi đang ở state PICK_BALL
+    Timing_Accumulate(&ctx->t_pickup, (ctx->state == STATE_PICK_BALL), delta);
+
+    // t_reverse: chỉ đếm khi đang ở state REVERSE
+    Timing_Accumulate(&ctx->t_reverse, (ctx->state == STATE_REVERSE), delta);
+
+    // t_drop: chỉ đếm khi đang ở state DROP_BALL
+    Timing_Accumulate(&ctx->t_drop, (ctx->state == STATE_DROP_BALL), delta);
+
+    // t_servopulse: chỉ đếm khi cờ servo_flag đang bật (servo đang thao tác)
+    Timing_Accumulate(&ctx->t_servopulse, (ctx->servo_flag == 1), delta);
+
+    // time_run: tổng thời gian xe chạy kể từ lúc khởi động, luôn cộng dồn
+    ctx->time_run += delta;
+}

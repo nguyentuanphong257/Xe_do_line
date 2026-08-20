@@ -1,0 +1,32 @@
+#include "../../Config/config.h"
+
+/*************************************************
+    STATE: CHECKPOINT
+
+    Khoi phuc lai state truoc do dua tren cac co da
+    luu trong ctx (pick_ball / turned_flag / drop_ball
+    / round). Viec dat xe lai vi tri checkpoint tren
+    san thi dau la thao tac thu cong cua nguoi choi.
+**************************************************/
+
+void State_Checkpoint(RobotContext_t *ctx)
+{
+    if(ctx->drop_ball == 1)
+    {
+        // Da do bi xong -> tiep tuc hanh trinh ve tram
+        ctx->state = ctx->turned_flag ? STATE_RETURN_TO_START : STATE_TURN_RIGHT;
+    }
+    else if(ctx->pick_ball == 1)
+    {
+        // Da lay bi nhung chua re/quay dau xong
+        ctx->state = ctx->turned_flag ? STATE_LINE_FOLLOW : STATE_TURN_RIGHT;
+    }
+    else
+    {
+        // Chua lay bi lan nao -> quay lai do line tu dau
+        ctx->state = STATE_LINE_FOLLOW;
+    }
+
+    ctx->last_state = STATE_CHECKPOINT;
+    LED_Green_On();
+}

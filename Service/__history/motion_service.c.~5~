@@ -1,0 +1,36 @@
+#include "Config/config.h"
+
+void Motion_Forward(int8 left, int8 right)
+{
+    Motor_Direct(M_FORWARD);
+
+    Motor_SetLeftDuty(left);
+    Motor_SetRightDuty(right);
+}
+
+
+void Motion_TurnRight(void)
+{
+    Motor_Direct(M_TURNRIGHT);
+
+    Motor_SetLeftDuty(MOTOR_MAX_DUTY);
+    Motor_SetRightDuty(SERVO_MAX_DUTY);
+}
+
+
+void Motion_Backward(void)
+{
+    Motor_Direct(M_BACKWARD);
+
+    Motor_SetLeftDuty(PWM_MAX_DUTY);
+    Motor_SetRightDuty(PWM_MAX_DUTY);
+}
+
+
+void Motion_Stop(void)
+{
+    Motor_Direct(M_STOP);
+
+    Motor_SetLeftDuty(0);
+    Motor_SetRightDuty(0);
+}

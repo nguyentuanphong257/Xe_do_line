@@ -1,0 +1,41 @@
+#include "main.h"
+
+
+void Function_Checkpoint(RobotContext_t *ctx)
+{
+   printf("Check point");
+    if (ctx->flag.pick_ball) 
+    {
+      if (ctx->flag.pick_turn_flag)
+      {
+         if (ctx->flag.drop_ball)
+         {
+            if (ctx->flag.drop_turn_flag)
+            {
+               if (ctx->flag.round == 0)
+               {
+                  ctx->state.current = STATE_RETURN_TO_START;
+               } else
+               {
+                  ctx->state.current = STATE_LINE_FOLLOWING;
+               }
+            } else 
+            {
+               drop_timeout = 0;
+               ctx->flag.servo_done = 1;
+               ctx->state.current = STATE_LINE_FOLLOWING;
+            }
+         } else
+         {
+            ctx->state.current = STATE_LINE_FOLLOWING;
+         }
+      } else 
+      {
+         pickup_timeout = 0;
+         ctx->state.current = STATE_LINE_FOLLOWING;
+      }
+    } else
+    {
+      ctx->state.current = STATE_LINE_FOLLOWING;
+    }
+}

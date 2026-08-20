@@ -1,0 +1,5 @@
+volatile int1 button_start = FALSE;
+volatile int1 button_check = FLASE;
+volatile int1 PI = 0;
+volatile int8 left_duty = 0;
+volatile int8 right_duty = 0;

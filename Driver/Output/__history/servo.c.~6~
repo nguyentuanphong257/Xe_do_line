@@ -1,0 +1,15 @@
+#include <config.h>
+
+#define SERVO_TICK_US  10  //Ttimer1_isr = 10us
+
+void Servo_Init(){
+   output_low(SERVO);
+   servo_duty = 0;
+}
+
+void Servo_SetPulse(int16 pulse_us){
+   if (pulse_us < 500)  pulse_us = 500;
+   if (pulse_us > 2500) pulse_us = 2500;
+ 
+   servo_duty = (int8)((pulse_us + (SERVO_TICK_US / 2)) / SERVO_TICK_US);
+}

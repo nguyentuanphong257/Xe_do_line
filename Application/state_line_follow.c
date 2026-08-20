@@ -1,0 +1,48 @@
+#include "main.h"
+
+
+void Function_LineFollow(RobotContext_t *ctx)
+{
+ // printf("Line Follow\r\n");
+   int8 ir_current_state;
+   ir_current_state = (ctx->input.S2 << 2) | (ctx->input.S1 << 1) | (ctx->input.S0);
+   if (PI_Confirm(ctx))
+   {
+      Motion_Stop();
+      if (ctx->flag.pick_ball == 0)
+      {
+         ctx->state.current = STATE_PICK_BALL;
+         return;
+      } else 
+      {
+         ctx->state.current = STATE_DROP_BALL;
+         return;
+      }
+   }
+   if (ir_current_state == 0b000){
+      if(ctx->time.t_err > LINE_ERR_TIMEOUT){
+         ctx->state.current = STATE_OUT_LINE;
+         return;
+      } else {
+         ir_current_state = ctx->input.ir_last_state;
+      }
+   }
+   switch (ir_current_state){
+      case 0b011:
+         Motion_Forward(MOTOR_DUTY_FORWARD_3,MOTOR_DUTY_FORWARD_2);
+         break;
+      case 0b001:
+         Motion_Forward(MOTOR_DUTY_FORWARD_3,MOTOR_DUTY_FORWARD_1);
+         break;
+      case 0b110:
+         Motion_Forward(MOTOR_DUTY_FORWARD_2,MOTOR_DUTY_FORWARD_3);
+         break;
+      case 0b100:
+         Motion_Forward(MOTOR_DUTY_FORWARD_1,MOTOR_DUTY_FORWARD_3);
+         break;
+      default:
+         Motion_Forward(MOTOR_DUTY_FORWARD_3,MOTOR_DUTY_FORWARD_3);
+         break;
+   }
+   ctx->input.ir_last_state = ir_current_state;
+}

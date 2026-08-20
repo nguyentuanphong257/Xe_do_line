@@ -1,0 +1,18 @@
+#include "Config/config.h"
+
+
+
+void GPIO_Output_Init(void)
+{
+    set_tris_c(0b00000000);
+    set_tris_d(0b00000000);
+}
+
+/*************************************************
+                WRITE PIN
+**************************************************/
+
+void GPIO_WritePin(int8 pin, int1 value)
+{
+    output_bit(pin, value);
+}

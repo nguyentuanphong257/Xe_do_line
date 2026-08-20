@@ -1,0 +1,16 @@
+#include "Config/config.h"
+
+
+void Sensor_Service_Update()
+{
+    disable_interrupts(INT_TIMER0);
+    ctx.input.S0 = g_S0;
+    ctx.input.S1 = g_S1;
+    ctx.input.S2 = g_S2;
+    ctx.input.PI_state       = g_PI;
+    ctx.input.btn_start       = g_button_start;
+    ctx.input.btn_checkpoint  = g_button_checkpoint;
+
+    enable_interrupts(INT_TIMER0);
+}
+

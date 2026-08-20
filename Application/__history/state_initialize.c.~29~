@@ -1,0 +1,11 @@
+#include "main.h"
+
+
+void Function_Initialize(RobotContext_t *ctx)
+{
+    printf("Initialize\r\n");
+    Motion_Stop();
+    LED_Green_On();
+    LED_Red_Off();
+    ctx->state.current = STATE_LINE_FOLLOWING;
+}

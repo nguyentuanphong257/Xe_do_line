@@ -1,0 +1,19 @@
+#include "pi_sensor.h"
+
+/*************************************************
+                INIT
+**************************************************/
+
+void PI_Sensor_Init(void)
+{
+    // GPIO dã du?c c?u hình trong GPIO_Input_Init()
+}
+
+/*************************************************
+                READ PI SENSOR
+**************************************************/
+
+int1 PI_Sensor_Read(void)
+{
+    return GPIO_ReadPin(PI);
+}

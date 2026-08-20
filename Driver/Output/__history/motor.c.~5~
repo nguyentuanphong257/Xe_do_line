@@ -1,0 +1,30 @@
+#include <config.h>
+
+void Motor_direct(MotorDirect_t direct){
+   switch(direct)
+   {
+      case FORWARD: 
+         output_high(ANT1);
+         output_low(ANT2);
+         output_high(BNT1);
+         output_low(BNT2);
+         break;
+       case BACKWARD:
+         output_low(ANT1);
+         output_high(ANT2);
+         output_low(BNT1);
+         output_high(BNT2);
+         break;
+       case TURN_RIGHT:
+         output_high(ANT1);
+         output_low(ANT2);
+         output_low(BNT1);
+         output_high(BNT2);
+         break;
+       default:
+         output_low(ANT1);
+         output_low(ANT2);
+         output_low(BNT1);
+         output_low(BNT2);
+   }
+}

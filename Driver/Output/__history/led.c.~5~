@@ -1,0 +1,36 @@
+#include "Config/config.h"
+
+
+void LED_Init(void)
+{
+    GPIO_WritePin(LED_GREEN, 0);
+    output_low(LED_RED);
+}
+
+void LED_Green_On(void)
+{
+    output_high(LED_GREEN);
+}
+
+void LED_Green_Off(void)
+{
+    output_low(LED_GREEN);
+}
+
+
+void LED_Red_On(void)
+{
+    output_high(LED_RED);
+}
+
+void LED_Red_Off(void)
+{
+    output_low(LED_RED);
+}
+
+
+void LED_All_Off(void)
+{
+    output_low(LED_GREEN);
+    output_low(LED_RED);
+}

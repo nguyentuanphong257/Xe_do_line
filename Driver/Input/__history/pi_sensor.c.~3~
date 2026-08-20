@@ -1,0 +1,25 @@
+
+volatile int32 PI_block_start = 0;
+volatile int1  PI_blocking = 0;
+
+void int2_PI_init(void){
+   clear_interrupt(INT_EXT2);
+   ext_int_edge(2, H_TO_L);
+   enable_interrupts(INT_EXT2);
+}
+
+void PI_detecting(){
+   PI_block_start = get_tick();
+   PI_blocking = 1;
+}
+
+int16 PI_confirm(){
+   if (!PI_blocking) return 0;
+   if (input(PI)) {
+      PI_blocking = 0;
+      return 0;
+   }
+   if (get_tick() -  PI_block_start >= 10000) return 1;
+   return 0;
+}
+

@@ -1,0 +1,19 @@
+#include "Config/config.h"
+
+void State_Initialization(RobotContext_t *ctx);
+void State_LineFollow(RobotContext_t *ctx);
+void State_PickBall(RobotContext_t *ctx);
+void State_Reverse(RobotContext_t *ctx);
+void State_TurnRight(RobotContext_t *ctx);
+void State_DropBall(RobotContext_t *ctx);
+void State_Stop(RobotContext_t *ctx);
+void State_Checkpoint(RobotContext_t *ctx);
+void State_ReturnToStart(RobotContext_t *ctx);
+
+void State_Initialization(RobotContext_t *ctx)
+{
+    Motion_Stop();
+    LED_Green_On();
+    
+    ctx->state.current = STATE_LINE_FOLLOWING;
+}

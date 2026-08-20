@@ -1,0 +1,30 @@
+#include "../Config/config.h"
+
+/*************************************************
+                CONSTANT (local)
+**************************************************/
+
+#define SERVO_PULSE_MIN_US   500
+#define SERVO_PULSE_MAX_US   2500
+#define SERVO_ANGLE_MAX      180
+
+/*************************************************
+                ROTATE
+**************************************************/
+
+// angle: góc quay mong muốn (0..180 độ)
+// Quy đổi tuyến tính sang độ rộng xung: 0 độ -> 500us, 180 độ -> 2500us
+void ServoService_Rotate(int8 angle)
+{
+    int16 pulse_us;
+
+    if(angle > SERVO_ANGLE_MAX)
+    {
+        angle = SERVO_ANGLE_MAX;
+    }
+
+    pulse_us = SERVO_PULSE_MIN_US
+             + ((int32)angle * (SERVO_PULSE_MAX_US - SERVO_PULSE_MIN_US)) / SERVO_ANGLE_MAX;
+
+    Servo_SetPulse(pulse_us);
+}

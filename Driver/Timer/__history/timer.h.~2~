@@ -1,0 +1,22 @@
+#ifndef __TIMER_H__
+#define __TIMER_H__
+
+#include "../../Config/config.h"
+
+/*************************************************
+ * GLOBAL VARIABLE
+ *************************************************/
+
+extern volatile int32 count_tick;
+
+/*************************************************
+ * TIMER DRIVER
+ *************************************************/
+
+void Timer0_Init(void);
+void Timer1_Init(void);
+
+void Timer_ResetTick(void);
+int32 Timer_GetTick(void);
+
+#endif

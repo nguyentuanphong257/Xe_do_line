@@ -1,0 +1,12 @@
+#include "Config/config.h"
+
+
+int1 PI_Sensor_Read(void)
+{
+    return GPIO_ReadPin(PI_SENSOR);
+}
+
+int1 PI_Confirm(RobotContext_t *ctx)
+{
+   if (ctx->input.PI_state)
+}

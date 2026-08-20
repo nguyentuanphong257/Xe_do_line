@@ -1,0 +1,20 @@
+//initialize input value
+volatile int1 button_start = FALSE;
+volatile int1 button_check = FALSE;
+volatile int1 PI = 0;
+//PWM variable
+volatile int8 left_duty = 0;
+volatile int8 right_duty = 0;
+volatile int16 servo_duty = 0;
+
+//FSM
+State_t state = INITIALIZE;
+
+//Time counter
+volatile int16 t_err = 0;
+volatile int16 t_pickup = 0;
+volatile int16 t_reverse = 0;
+volatile int16 t_dropball = 0;
+volatile int16 t_PI = 0;
+
+volatile int1 S[3] = {0,0,0};

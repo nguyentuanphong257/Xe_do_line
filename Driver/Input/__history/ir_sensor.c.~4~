@@ -1,0 +1,26 @@
+#include "../../Config/config.h"
+
+/*************************************************
+                INIT
+    Cac chan IR da duoc cau hinh input trong
+    GPIO_Input_Init(), khong can them gi o day.
+**************************************************/
+
+void IR_Sensor_Init(void)
+{
+
+}
+
+/*************************************************
+                READ (RAW)
+    Chi doc tho 3 cam bien IR, khong dien giai
+    thanh trang thai line (viec do thuoc ve
+    Service/sensor_service.c va Application).
+**************************************************/
+
+void IR_Sensor_Read(int1 *s0, int1 *s1, int1 *s2)
+{
+    *s0 = GPIO_ReadPin(IR1);
+    *s1 = GPIO_ReadPin(IR2);
+    *s2 = GPIO_ReadPin(IR3);
+}

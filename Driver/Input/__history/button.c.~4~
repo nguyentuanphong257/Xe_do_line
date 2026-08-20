@@ -1,0 +1,18 @@
+#include "Config/config.h"
+
+
+void Button_Init(void)
+{
+
+}
+
+/*************************************************
+                READ (RAW)
+    Dung chung cho ca BUTTON1 (start) va
+    BUTTON2 (checkpoint), truyen pin lam tham so.
+**************************************************/
+
+int1 Button_Read(int8 pin)
+{
+    return GPIO_ReadPin(pin);
+}

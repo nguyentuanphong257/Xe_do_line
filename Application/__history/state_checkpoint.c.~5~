@@ -1,0 +1,13 @@
+#include "Config/config.h"
+
+
+void State_Checkpoint(RobotContext_t *ctx)
+{
+    if (ctx->flag.pick_ball) 
+    {
+      
+    } else
+    {
+      pickup_timeout = 0;
+    }
+}

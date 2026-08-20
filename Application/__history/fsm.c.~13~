@@ -1,0 +1,26 @@
+#include <config.h>
+
+void Reset_flags()
+{
+   PickBall = 0;
+   DropBall = 0;
+}
+
+void state_Initialize(){
+   timer0_init();
+   timer1_init();
+   Reset_flags();
+   state = LINE_FOLLOWING;
+}
+
+void state_LineFollowing()
+{
+   if (PI_confirm())
+   {
+      Motor_direct(M_STOP);
+      if (PickBall == 0)
+      {
+         state = PICK_BALL;
+      }
+   }
+}

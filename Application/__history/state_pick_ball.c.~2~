@@ -1,0 +1,14 @@
+#include "Config/config.h"
+
+void State_PickBall(RobotContext_t *ctx)
+{
+    Motion_Stop();
+
+    if(Timing_IsTimeout(ctx->t_pickup, PICKUP_TIMEOUT))
+    {
+        ctx->pick_ball = 1;
+
+        ctx->last_state = ctx->state;
+        ctx->state = STATE_REVERSE;
+    }
+}

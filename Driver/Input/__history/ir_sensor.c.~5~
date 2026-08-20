@@ -1,0 +1,17 @@
+#include "Config/config.h"
+
+
+
+void IR_Sensor_Init(void)
+{
+
+}
+
+*************************************/
+
+void IR_Sensor_Read(int1 *s0, int1 *s1, int1 *s2)
+{
+    *s0 = GPIO_ReadPin(IR1);
+    *s1 = GPIO_ReadPin(IR2);
+    *s2 = GPIO_ReadPin(IR3);
+}

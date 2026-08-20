@@ -1,0 +1,22 @@
+#include "../../Config/config.h"
+
+/*************************************************
+    STATE: PICK_BALL
+
+    Co cau lay bi hoan toan bang co khi, khong can
+    dem so luong bi. Chi can cho du thoi gian de co
+    cau hoan tat thao tac roi lui xe ra.
+**************************************************/
+
+void State_PickBall(RobotContext_t *ctx)
+{
+    Motion_Stop();
+
+    if(Timing_IsTimeout(ctx->t_pickup, PICKUP_TIMEOUT))
+    {
+        ctx->pick_ball = 1;
+
+        ctx->last_state = ctx->state;
+        ctx->state = STATE_REVERSE;
+    }
+}

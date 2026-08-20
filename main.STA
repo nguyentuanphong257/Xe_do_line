@@ -1,0 +1,121 @@
+
+ROM used:   5290/98304 (5%)
+            5290/98304 (5%) including unused fragments
+
+            3.0 Average locations per line
+            13.8 Average locations per statement
+
+RAM used:   103/3328 (3%) at main() level
+            146/3328 (4%) worst case
+
+Stack used: 9 worst case (5 in main + 4 for interrupts)
+Stack size: 31
+
+Lines Stmts  %   Files
+----- ----- ---  -----
+   45     6   2  main.c
+  183     0   0  main.h
+  753     0   0  ..\..\..\..\..\..\Program Files (x86)\PICC\Devices\18F2685.h
+   22     0   0  global.c
+   20     6   2  Driver\Timer\timer.c
+   79    44  11  Driver\Interrupt\interrupt.c
+   58    32   8  Driver\Output\motor.c
+   16     7   2  Driver\Output\servo.c
+    9     1   0  Driver\Output\gpio_output.c
+   37     8   2  Driver\Output\led.c
+   14     4   1  Driver\Input\pi_sensor.c
+   12     3   1  Driver\Input\ir_sensor.c
+    9     1   0  Driver\Input\button.c
+   18     6   2  Driver\Input\gpio_input.c
+   14     7   2  Service\sensor_service.c
+   41    16   4  Service\motion_service.c
+   21     5   1  Service\servo_service.c
+   12     4   1  Application\state_initialize.c
+   49    31   8  Application\state_line_follow.c
+   58    39  10  Application\state_turn_right.c
+   19    10   3  Application\state_pick_ball.c
+   23     7   2  Application\state_reverse.c
+   25    14   4  Application\state_drop_ball.c
+   12     4   1  Application\state_out_line.c
+   42    24   6  Application\state_checkpoint.c
+   80    52  14  Application\state_return_to_start.c
+   23    21   5  Application\fsm.c
+   49    32   8  Application\app.c
+----- -----
+ 1743   384 Total
+
+Page ROM  %  RAM   Vol Diff  Functions:
+---- --- --- ---   --- ----  ----------
+0     40   0    1    70  2.0  @delay_ms1
+0     18   0    0    70  2.0  timer0_init
+0     16   0    0    72  1.8  timer1_init
+0     12   0    0    54  1.2  Interrupt_Init
+0    270   3    3  1264  8.8  Timer0_isr
+0     98   1    0   304  4.5  Timer1_isr
+0     24   0    0   115  1.7  Motor_Init
+0     88   1    1   497  3.8  Motor_Direct
+0     16   0    1    68  2.4  Motor_SetLeftDuty
+0     16   0    1    71  2.0  Motor_SetRightDuty
+0     16   0    0    43  1.8  Servo_Init
+0     84   1    4   183  4.0  Servo_SetPulse
+0     68   1    5   195  3.0  @DIV1616
+0     88   1    2    48  1.6  GPIO_WritePin
+0     62   1    6    30  1.3  @WRITEBITA
+0     18   0    0    56  1.6  LED_Init
+0     10   0    0    30  1.3  LED_Green_On
+0     14   0    0    30  1.3  LED_Green_Off
+0      8   0    0    21  0.9  LED_Red_Toggle
+0     10   0    0    30  1.3  LED_Red_Off
+0     12   0    0    25  1.2  PI_Sensor_Read
+0     86   1    6   149  4.9  PI_Confirm
+0     94   1    8   152  2.8  IR_Sensor_Read
+0     12   0    1    30  1.3  Button_Read
+0     26   0    0    92  1.3  GPIO_Init
+0     42   0    1    30  1.3  GPIO_ReadPin
+0     48   0    5    94  1.8  @READBITA
+0     28   0    0   250  2.2  Sensor_State_Update
+0     22   0    2    94  1.8  Motion_Forward
+0     26   0    0    72  1.2  Motion_TurnRight
+0     26   0    2    94  1.8  Motion_Backward
+0     20   0    0    79  0.9  Motion_Stop
+0    120   1    7   188  4.3  ServoService_Rotate
+0     86   1   14    92  2.9  @MUL3232
+0    144   1   13  1161  9.6  @DIV3232
+0     22   0    4    92  2.9  Function_Initialize
+0    306   3    7  1161  9.6  Function_LineFollow
+0     88   1    4   272  3.3  Reset_Flag
+0    654   6    6  1801  6.8  Function_TurnRight
+0    124   1    6   279  4.4  Function_PickBall
+0    108   1    6   210  4.7  Function_Reverse
+0    178   2    6   457  5.1  Function_DropBall
+0     32   0    4   118  3.5  Function_OutLine
+0    194   2    4   723  4.7  Function_Checkpoint
+0    718   7    7  2353 10.8  Function_ReturnToStart
+0    176   2    2   567  5.2  FSM_Run
+0     30   0    0   138  1.7  App_Init
+0    466   4    4  1264  3.4  RobotContext_Init
+0    106   1    0    92  2.4  MAIN
+ Inline         0   195  3.0  @cinit1
+
+Program metrics:
+    Functions               50
+    Statements              384
+    Comments                169
+    Volume (V)              28635
+    Difficulty (D)          166.5
+    Effort to implement (E) 4766354
+    Time to implement (T)   73 hours, 33 minutes
+    Est Delivered Bugs (B)  9
+    Cyclomatic Complexity   78
+    Maintainability (MI)    119
+
+ Segment     Used  Free
+-----------  ----  ----
+00000-00002     4  0  
+00004-00006     0  4  
+00008-00142   316  0  
+00144-0FFFE  4970  60242  
+10000-17FFE     0  32768  
+
+
+

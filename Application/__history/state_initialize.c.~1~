@@ -1,0 +1,17 @@
+#include "../../Config/config.h"
+
+/*************************************************
+                STATE: INITIALIZE
+    App_Init() da goi RobotContext_Init() va cac
+    Driver_Init() roi. State nay chi dam bao ngo ra
+    o trang thai an toan truoc khi bat dau chay.
+**************************************************/
+
+void State_Initialize(RobotContext_t *ctx)
+{
+    Motion_Stop();
+    LED_All_Off();
+
+    ctx->last_state = ctx->state;
+    ctx->state = STATE_LINE_FOLLOW;
+}

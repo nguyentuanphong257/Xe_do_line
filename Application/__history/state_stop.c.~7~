@@ -1,0 +1,13 @@
+#include "main.h"
+
+void Function_Stop(RobotContext_t *ctx)
+{
+    Motion_Stop();
+    LED_Red_On();
+    printf("Dang o trang thai STOP");
+    if(ctx->input.btn_checkpoint == 1)
+    {
+        LED_Red_Off();
+        ctx->state.current = STATE_CHECK_POINT;
+    }
+}

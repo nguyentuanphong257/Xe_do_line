@@ -1,0 +1,54 @@
+#include "led.h"
+
+/*************************************************
+                INIT
+**************************************************/
+
+void LED_Init(void)
+{
+    // RC0 = Green
+    // RC1 = Red
+
+    set_tris_c(0b00000100);
+
+    output_low(LED_GREEN);
+    output_low(LED_RED);
+}
+
+/*************************************************
+                GREEN LED
+**************************************************/
+
+void LED_Green_On(void)
+{
+    output_high(LED_GREEN);
+}
+
+void LED_Green_Off(void)
+{
+    output_low(LED_GREEN);
+}
+
+/*************************************************
+                RED LED
+**************************************************/
+
+void LED_Red_On(void)
+{
+    output_high(LED_RED);
+}
+
+void LED_Red_Off(void)
+{
+    output_low(LED_RED);
+}
+
+/*************************************************
+                ALL LED
+**************************************************/
+
+void LED_All_Off(void)
+{
+    output_low(LED_GREEN);
+    output_low(LED_RED);
+}

@@ -1,0 +1,21 @@
+#include "../../Config/config.h"
+
+/*************************************************
+    STATE: REVERSE
+
+    Lui xe theo thoi gian dat truoc (khong dung
+    cam bien), sau do chuyen sang re phai.
+**************************************************/
+
+void State_Reverse(RobotContext_t *ctx)
+{
+    Motion_Backward();
+
+    if(Timing_IsTimeout(ctx->t_reverse, REVERSE_TIME))
+    {
+        Motion_Stop();
+
+        ctx->last_state = ctx->state;
+        ctx->state = STATE_TURN_RIGHT;
+    }
+}

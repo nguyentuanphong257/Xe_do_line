@@ -1,0 +1,20 @@
+#include "Config/config.h"
+
+
+#define SERVO_PULSE_MIN_US   500
+#define SERVO_PULSE_MAX_US   2500
+#define SERVO_ANGLE_MAX      180
+
+void ServoService_Rotate(int8 angle)
+{
+    int16 pulse_us;
+
+    if(angle > SERVO_ANGLE_MAX)
+    {
+        angle = SERVO_ANGLE_MAX;
+    }
+
+    pulse_us = SERVO_PULSE_MIN_US + ((int32)angle * (SERVO_PULSE_MAX_US - SERVO_PULSE_MIN_US)) / SERVO_ANGLE_MAX;
+
+    Servo_SetPulse(pulse_us);
+}

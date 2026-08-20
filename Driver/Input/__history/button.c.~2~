@@ -1,0 +1,19 @@
+#include "button.h"
+
+/*************************************************
+                INIT
+**************************************************/
+
+void Button_Init(void)
+{
+    // GPIO dã du?c c?u hình trong GPIO_Input_Init()
+}
+
+/*************************************************
+                READ BUTTON
+**************************************************/
+
+int1 Button_Read(void)
+{
+    return GPIO_ReadPin(CHECK_POINT);
+}

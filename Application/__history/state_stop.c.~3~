@@ -1,0 +1,13 @@
+#include "Config/config.h"
+
+void State_Stop(RobotContext_t *ctx)
+{
+    Motion_Stop();
+    LED_Red_On();
+
+    if(ctx->input.btn_checkpoint == 1)
+    {
+        LED_Red_Off();
+        ctx->state.current = CHECK_POINT;
+    }
+}

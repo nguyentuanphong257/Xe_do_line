@@ -1,0 +1,47 @@
+#include "main.h"
+
+void App_Init(void)
+{
+    GPIO_Output_Init();
+    GPIO_Input_Init();
+    Motor_Init();
+    Servo_Init();
+    LED_Init();
+    RobotContext_Init(&ctx);
+    timer0_init();
+    timer1_init();
+    Interrupt_Init();
+}
+
+void RobotContext_Init(RobotContext_t *ctx)
+{
+    // ---- State ----
+    ctx->state.current = STATE_INITIALIZE;
+
+    // ---- Flags ----
+    ctx->flag.pick_ball  = 0;
+    ctx->flag.pick_turn_flag = 0;
+    ctx->flag.drop_ball  = 0;
+    ctx->flag.drop_turn_flag = 0;
+    ctx->flag.round = 0;
+    ctx->flag.servo_done = 0;
+
+    // ---- Input (snapshot cam bien) ----
+    ctx->input.S0 = 0;
+    ctx->input.S1 = 0;
+    ctx->input.S2 = 0;
+    ctx->input.PI_state       = 0;
+    ctx->input.btn_checkpoint = 0;
+    ctx->input.ir_last_state  = 0;
+
+    // ---- Timing ----
+    ctx->time.t_dropball      = 0;
+    ctx->time.t_err           = 0;
+    ctx->time.t_forward       = 0;
+    ctx->time.t_pi            = 0;
+    ctx->time.t_pickup        = 0;
+    ctx->time.t_reverse       = 0;
+    ctx->time.t_run           = 0;
+    ctx->time.t_servo_pulse   = 0;
+    ctx->time.t_turnright     = 0;
+}

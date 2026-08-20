@@ -1,0 +1,13 @@
+#include "main.h"
+
+void Function_OutLine(RobotContext_t *ctx)
+{
+   printf("OUT LINE\n");
+    Motion_Stop();
+    LED_Red_On();
+    if(ctx->input.btn_checkpoint == 1)
+    {
+        LED_Red_Off();
+        ctx->state.current = STATE_CHECK_POINT;
+    }
+}

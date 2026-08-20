@@ -1,0 +1,57 @@
+#include "main.h"
+
+void Motor_Init(void)
+{
+    output_low(ANT1);
+    output_low(ANT2);
+
+    output_low(BNT1);
+    output_low(BNT2);
+
+    left_duty  = 0;
+    right_duty = 0;
+}
+
+void Motor_Direct(MotorDirect_t direct){
+   switch(direct)
+   {
+      case M_FORWARD: 
+         printf("MOTOR FORWARD\n");
+         output_high(ANT1);
+         output_low(ANT2);
+         output_high(BNT1);
+         output_low(BNT2);
+         break;
+       case M_BACKWARD:
+       printf("MOTOR BACKWARD\n");
+         output_low(ANT1);
+         output_high(ANT2);
+         output_low(BNT1);
+         output_high(BNT2);
+         break;
+       case M_TURNRIGHT:
+       printf("MOTOR TURN RIGHT");
+         output_high(ANT1);
+         output_low(ANT2);
+         output_low(BNT1);
+         output_high(BNT2);
+         break;
+       default:
+       printf("MOTOR STOP");
+         output_low(ANT1);
+         output_low(ANT2);
+         output_low(BNT1);
+         output_low(BNT2);
+   }
+}
+
+void Motor_SetLeftDuty(int8 duty){
+   if (duty > MOTOR_MAX_DUTY) duty = MOTOR_MAX_DUTY;
+   left_duty = duty;
+}
+
+void Motor_SetRightDuty(int8 duty){
+   if (duty > MOTOR_MAX_DUTY) duty = MOTOR_MAX_DUTY;
+   right_duty = duty;
+}
+

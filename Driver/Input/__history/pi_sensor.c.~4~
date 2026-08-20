@@ -1,0 +1,11 @@
+#include <config.h>
+
+int1 PI_confirm(){
+   int1 PI_read = PI;
+   if (PI_read && t_PI > 1000)
+   {
+      return TRUE;
+   }
+   return FALSE;
+}
+

@@ -1,0 +1,33 @@
+#include "Config/config.h"
+
+
+void RobotContext_Init(RobotContext_t *ctx)
+{
+    // ---- State ----
+    ctx->state.current = STATE_INITIALIZE;
+    ctx->state.last    = STATE_INITIALIZE;
+
+    // ---- Flags ----
+    ctx->flag.pick_ball  = 0;
+    ctx->flag.drop_ball  = 0;
+    ctx->flag.turned     = 0;
+    ctx->flag.round      = 0;
+    ctx->flag.servo_done = 0;
+
+    // ---- Input (snapshot cam bien) ----
+    ctx->in.S0 = 0;
+    ctx->in.S1 = 0;
+    ctx->in.S2 = 0;
+    ctx->in.PI_state         = 0;
+    ctx->in.btn_checkpoint   = 0;
+    ctx->in.btn_start        = 0;
+
+    // ---- Timing ----
+    ctx->time.t_err         = 0;
+    ctx->time.t_pickup      = 0;
+    ctx->time.t_reverse     = 0;
+    ctx->time.t_drop        = 0;
+    ctx->time.t_servo_pulse = 0;
+    ctx->time.t_pi          = 0;
+    ctx->time.t_run         = 0;
+}

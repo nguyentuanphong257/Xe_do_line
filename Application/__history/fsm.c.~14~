@@ -1,0 +1,36 @@
+#include <config.h>
+
+void Reset_flags()
+{
+   PickBall = 0;
+   DropBall = 0;
+}
+
+void state_Initialize(){
+   timer0_init();
+   timer1_init();
+   Reset_flags();
+   state = LINE_FOLLOWING;
+}
+
+void state_LineFollowing()
+{
+   int1 S0 = 0;
+   int1 S1 = 0;
+   int1 S2 = 0;
+   if (PI_confirm())
+   {
+      Motor_direct(M_STOP);
+      if (PickBall == 0)
+      {
+         state = PICK_BALL;
+      } else state = DROP_BALL;
+   }
+   else 
+   {
+      S0 = S[IR_RIGHT];
+      S1 = S[IR_CENTER];
+      S2 = S[IR_LEFT];
+      
+   }
+}

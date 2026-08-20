@@ -1,0 +1,83 @@
+#include "main.h"
+
+
+static void Reset_Flag(RobotContext_t *ctx)
+{
+    ctx->flag.pick_ball       = 0;
+    ctx->flag.pick_turn_flag  = 0;
+    ctx->flag.drop_ball       = 0;
+    ctx->flag.drop_turn_flag  = 0;
+    ctx->flag.round           = 1;
+    ctx->flag.servo_done      = 0;
+}
+
+void Function_ReturnToStart(RobotContext_t *ctx)
+{
+   printf("Return to start\n");
+   int8 ir_current_state;
+   ir_current_state = (ctx->input.S2 << 2) | (ctx->input.S1 << 1) | (ctx->input.S0);
+   
+   if (ir_current_state == 0b111)
+   {
+      if (ctx->time.t_forward < TIME_FORWARD_MAX)
+      {
+         Motion_Forward(5,5);
+         return;
+      }
+      Reset_Flag(ctx);
+      ctx->state.current = STATE_TURN_RIGHT;
+      ctx->time.t_forward = 0;
+      return;
+   }
+   if (ctx->time.t_run < TIME_RUN_MAX)
+   {
+      if (ir_current_state == 0b000)
+      {
+         if (ctx->time.t_err > LINE_ERR_TIMEOUT)
+         {
+            ctx->state.current = STATE_OUT_LINE;
+            return;
+         } else
+         {
+            ir_current_state = ctx->input.ir_last_state;
+         }
+      }
+   } else 
+   {
+      if (ir_current_state == 0b111)
+      {
+         if (ctx->time.t_err > 100) //100ms
+         {
+            Reset_Flag(ctx);
+            ctx->state.current = STATE_TURN_RIGHT;
+            return;
+         } else
+         {
+            ir_current_state = ctx->input.ir_last_state;
+         }
+      }
+   }
+   switch (ir_current_state)
+   {
+      case 0b101:
+         Motion_Forward(8,8);
+         ctx->input.ir_last_state = 0b101;
+         break;
+      case 0b001:
+         Motion_Forward(5,8);
+         ctx->input.ir_last_state = 0b001;
+         break;
+      case 0b011:
+         Motion_Forward(2,8);
+         ctx->input.ir_last_state = 0b011;
+         break;
+      case 0b100:
+         Motion_Forward(8,5);
+         ctx->input.ir_last_state = 0b100;
+         break;
+      default:
+         Motion_Forward(8,2);
+         ctx->input.ir_last_state = 0b110;
+         break;
+   }
+}

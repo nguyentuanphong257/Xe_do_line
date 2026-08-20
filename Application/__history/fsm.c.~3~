@@ -1,0 +1,13 @@
+#include <config.h>
+
+void Reset_flags()
+{
+
+};
+
+void state_initialize(){
+   timer0_init();
+   timer1_init();
+   Reset_flags();
+   state = LINE_FOLLOWING;
+}

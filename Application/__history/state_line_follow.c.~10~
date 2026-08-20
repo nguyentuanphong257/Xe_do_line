@@ -1,0 +1,48 @@
+#include "Config/config.h"
+
+/*************************************************
+    STATE: LINE_FOLLOW
+
+    Quy uoc muc tin hieu (theo mo ta thiet ke):
+    S0 = cam bien giua  -> 1 khi dang nam tren line den
+    S1 = cam bien trai  -> 1 khi bat gap line den (xe lech phai)
+    S2 = cam bien phai  -> 1 khi bat gap line den (xe lech trai)
+
+    PI_state = 1 khi cam bien PI bi chan sang (xe dam vao station)
+**************************************************/
+
+#define DUTY_FULL   PWM_MAX_DUTY
+#define DUTY_TURN   (PWM_MAX_DUTY / 2)
+
+void State_LineFollow(RobotContext_t *ctx)
+{
+    if(ctx->input.PI_state == 1)
+    {
+        if(ctx->time.t_pi > PI_CONFIRM_TIME)
+        {
+            Motion_Stop();
+
+            if(ctx->flag.pick_ball == 0)
+            {
+                ctx->state.current = PICK_BALL;
+            }
+            else
+            {
+                ctx->state.current = DROP_BALL;
+            }
+            return;
+        }
+    }
+
+    if (ctx->input.S2 == 1 && ctx->input.S1 == 0 && ctx->input.S0 == 0){
+      Motion_Forward(80, 50);
+      ctx->input.Last_S2 = ctx->input.S2;
+      ctx->input.Last_S1 = ctx->input.S1;
+      ctx->input.Last_S0 = ctx->input.S0;
+    } else if (ctx->input.S2 == 1 && ctx->input.S1 == 1 && ctx->input.S0 == 0){
+      Motion_Forward(80, 20);
+      ctx->input.Last_S2 = ctx->input.S2;
+      ctx->input.Last_S1 = ctx->input.S1;
+      ctx->input.Last_S0 = ctx->input.S0;
+    } else if (ctx->input.S2 == 0 && ctx->input.S1 == 1 && ctx->input.S0 == 0)
+}

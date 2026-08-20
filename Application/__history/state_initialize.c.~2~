@@ -1,0 +1,11 @@
+#include "Config/config.h"
+
+
+void State_Initialize(RobotContext_t *ctx)
+{
+    Motion_Stop();
+    LED_All_Off();
+
+    ctx->last_state = ctx->state;
+    ctx->state = STATE_LINE_FOLLOW;
+}

@@ -1,0 +1,21 @@
+#include "../Config/config.h"
+
+/*************************************************
+                UPDATE
+**************************************************/
+
+// Lớp Service này KHÔNG tự đọc phần cứng - việc đọc thô đã được
+// Timer1_ISR() thực hiện mỗi 10us và lưu vào các biến g_*.
+// Ở đây chỉ copy snapshot sang ctx để Application dùng, tránh Application
+// đọc trực tiếp biến toàn cục / phần cứng.
+void Sensor_Service_Update(RobotContext_t *ctx)
+{
+    ctx->S0 = g_S0;
+    ctx->S1 = g_S1;
+    ctx->S2 = g_S2;
+
+    ctx->PI_state = g_PI;
+
+    ctx->button_checkpoint = g_button_checkpoint;
+    ctx->button_start      = g_button_start;
+}

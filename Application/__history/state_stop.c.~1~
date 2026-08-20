@@ -1,0 +1,24 @@
+#include "../../Config/config.h"
+
+/*************************************************
+    STATE: STOP
+
+    Xe tu tat (dung dong co) khi van khoi line qua
+    thoi gian cho phep. Cho nguoi dung dat lai xe vao
+    vi tri checkpoint (thu cong) roi bam nut checkpoint
+    de FSM khoi phuc va chay tiep.
+**************************************************/
+
+void State_Stop(RobotContext_t *ctx)
+{
+    Motion_Stop();
+    LED_Red_On();
+
+    if(ctx->button_checkpoint == 1)
+    {
+        LED_Red_Off();
+
+        ctx->last_state = ctx->state;
+        ctx->state = STATE_CHECKPOINT;
+    }
+}

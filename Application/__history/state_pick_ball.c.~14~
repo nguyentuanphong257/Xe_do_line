@@ -1,0 +1,14 @@
+#include "main.h"
+
+void Function_PickBall(RobotContext_t *ctx)
+{
+   //("Pick ball\n");
+    Motion_Stop();
+
+    if(ctx->time.t_pickup > pickup_timeout)
+    {
+        ctx->flag.pick_ball = 1;
+        ctx->state.current = STATE_REVERSE;
+        LED_Red_Off();
+    } LED_Red_Toggle();
+}

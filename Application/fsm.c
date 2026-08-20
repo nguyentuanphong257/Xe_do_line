@@ -1,0 +1,22 @@
+#include "main.h"
+
+
+void FSM_Run(RobotContext_t *ctx)
+{
+    switch(ctx->state.current)
+    {
+        case STATE_INITIALIZE:      Function_Initialize(ctx);     break;
+        case STATE_LINE_FOLLOWING:  Function_LineFollow(ctx);     break;
+        case STATE_PICK_BALL:       Function_PickBall(ctx);       break;
+        case STATE_REVERSE:         Function_Reverse(ctx);        break;
+        case STATE_TURN_RIGHT:      Function_TurnRight(ctx);      break;
+        case STATE_DROP_BALL:       Function_DropBall(ctx);       break;
+        case STATE_OUT_LINE:        Function_OutLine(ctx);         break;
+        case STATE_CHECK_POINT:     Function_Checkpoint(ctx);     break;
+        case STATE_RETURN_TO_START: Function_ReturnToStart(ctx);  break;
+
+        default:
+            Function_OutLine(ctx);
+            break;
+    }
+}

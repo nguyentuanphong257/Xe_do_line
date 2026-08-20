@@ -1,0 +1,19 @@
+#include "main.h"
+
+
+void timer0_init (){
+   setup_timer_0(T0_INTERNAL | T0_DIV_16);
+   set_timer0(65536 - 500);  //500.2us = 1ms
+   clear_interrupt(INT_TIMER0);
+}
+
+void timer1_init (){
+   setup_timer_1(T1_INTERNAL | T1_DIV_BY_8);
+   set_timer1(65536 - 15);  //10.1us = 10us => Ftimer = 100kHz
+   clear_interrupt(INT_TIMER1);
+}
+
+
+
+
+

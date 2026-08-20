@@ -1,0 +1,56 @@
+
+
+/*************************************************
+ * GLOBAL VARIABLE
+ *************************************************/
+
+volatile int32 count_tick = 0;
+
+/*************************************************
+ * TIMER0 INIT
+ *************************************************/
+
+void Timer0_Init(void)
+{
+   setup_timer_0(T0_INTERNAL | T0_DIV_8);
+
+   // 50 counts ˜ 50 us (theo code teammate)
+   set_timer0(65536 - 50);
+
+   clear_interrupt(INT_TIMER0);
+
+   enable_interrupts(INT_TIMER0);
+}
+
+/*************************************************
+ * TIMER1 INIT
+ *************************************************/
+
+void Timer1_Init(void)
+{
+   setup_timer_1(T1_INTERNAL | T1_DIV_BY_8);
+
+   set_timer1(65536 - 50);
+
+   clear_interrupt(INT_TIMER1);
+
+   enable_interrupts(INT_TIMER1);
+}
+
+/*************************************************
+ * RESET TICK
+ *************************************************/
+
+void Timer_ResetTick(void)
+{
+   count_tick = 0;
+}
+
+/*************************************************
+ * GET TICK
+ *************************************************/
+
+int32 Timer_GetTick(void)
+{
+   return count_tick;
+}

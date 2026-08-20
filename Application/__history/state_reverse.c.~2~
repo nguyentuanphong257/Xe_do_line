@@ -1,0 +1,15 @@
+#include "Config/config.h"
+
+
+void State_Reverse(RobotContext_t *ctx)
+{
+    Motion_Backward();
+
+    if(Timing_IsTimeout(ctx->t_reverse, REVERSE_TIME))
+    {
+        Motion_Stop();
+
+        ctx->last_state = ctx->state;
+        ctx->state = STATE_TURN_RIGHT;
+    }
+}

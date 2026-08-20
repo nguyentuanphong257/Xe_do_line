@@ -1,0 +1,21 @@
+#include "../../Config/config.h"
+
+/*************************************************
+                INIT
+    Chan PI da duoc cau hinh input trong
+    GPIO_Input_Init(), khong can them gi o day.
+**************************************************/
+
+void PI_Sensor_Init(void)
+{
+
+}
+
+/*************************************************
+                READ (RAW)
+**************************************************/
+
+int1 PI_Sensor_Read(void)
+{
+    return GPIO_ReadPin(PI);
+}

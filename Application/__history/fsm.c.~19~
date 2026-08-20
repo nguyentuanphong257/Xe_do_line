@@ -1,0 +1,22 @@
+#include "Config/config.h"
+
+
+void FSM_Run(RobotContext_t *ctx)
+{
+    switch(ctx->state.current)
+    {
+        case STATE_INITIALIZE:      State_Initialize(ctx);     break;
+        case STATE_LINE_FOLLOWING:  State_LineFollow(ctx);     break;
+        case STATE_PICK_BALL:       State_PickBall(ctx);       break;
+        case STATE_REVERSE:         State_Reverse(ctx);        break;
+        case STATE_TURN_RIGHT:      State_TurnRight(ctx);      break;
+        case STATE_DROP_BALL:       State_DropBall(ctx);       break;
+        case STATE_STOP:            State_Stop(ctx);           break;
+        case STATE_CHECKPOINT:      State_Checkpoint(ctx);     break;
+        case STATE_RETURN_TO_START: State_ReturnToStart(ctx);  break;
+
+        default:
+            State_Stop(ctx);
+            break;
+    }
+}

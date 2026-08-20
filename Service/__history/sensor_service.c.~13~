@@ -1,0 +1,14 @@
+#include "main.h"
+
+void Sensor_State_Update()
+{
+    disable_interrupts(INT_TIMER0);
+    ctx.input.S0 = g_S0;
+    ctx.input.S1 = g_S1;
+    ctx.input.S2 = g_S2;
+    ctx.input.PI_state  = g_PI;
+    ctx.input.btn_checkpoint  = g_button_checkpoint;
+    printf("S0: %d, S1: %d, S2: %d\n",ctx.input.S0,ctx.input.S1,ctx.input.S2);
+
+    enable_interrupts(INT_TIMER0);
+}

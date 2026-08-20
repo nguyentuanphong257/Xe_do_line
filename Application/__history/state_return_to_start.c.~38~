@@ -1,0 +1,75 @@
+#include "main.h"
+
+
+
+void Function_ReturnToStart(RobotContext_t *ctx)
+{
+   //printf("Return to start\n");
+   //printf("Drop turn flag = %d\n",ctx->flag.drop_turn_flag);
+   int8 ir_current_state;
+   ir_current_state = (ctx->input.S2 << 2) | (ctx->input.S1 << 1) | (ctx->input.S0);
+   
+   if (ir_current_state == 0b111)
+   {
+      if (ctx->time.t_forward < TIME_FORWARD_MAX)
+      {
+         Motion_Forward(MOTOR_DUTY_FORWARD_2,MOTOR_DUTY_FORWARD_2);
+         return;
+      }
+      ctx->flag.round = 1;
+      ctx->state.current = STATE_TURN_RIGHT;
+      ctx->time.t_forward = 0;
+      return;
+   }
+   if (ctx->time.t_run < TIME_RUN_MAX)
+   {
+      if (ir_current_state == 0b000)
+      {
+         if (ctx->time.t_err > LINE_ERR_TIMEOUT)
+         {
+            ctx->state.current = STATE_OUT_LINE;
+            return;
+         } else
+         {
+            ir_current_state = ctx->input.ir_last_state;
+         }
+      }
+   } else 
+   {
+      if (ir_current_state == 0b000)
+      {
+         if (ctx->time.t_err > 100) //100ms
+         {
+            ctx->flag.round = 1;
+            ctx->state.current = STATE_TURN_RIGHT;
+            return;
+         } else
+         {
+            ir_current_state = ctx->input.ir_last_state;
+         }
+      }
+   }
+   switch (ir_current_state)
+   {
+      case 0b010:
+         Motion_Forward(MOTOR_DUTY_FORWARD_3,MOTOR_DUTY_FORWARD_3);
+         ctx->input.ir_last_state = 0b010;
+         break;
+      case 0b110:
+         Motion_Forward(MOTOR_DUTY_FORWARD_2,MOTOR_DUTY_FORWARD_3);
+         ctx->input.ir_last_state = 0b110;
+         break;
+      case 0b100:
+         Motion_Forward(MOTOR_DUTY_FORWARD_1,MOTOR_DUTY_FORWARD_3);
+         ctx->input.ir_last_state = 0b100;
+         break;
+      case 0b011:
+         Motion_Forward(MOTOR_DUTY_FORWARD_3,MOTOR_DUTY_FORWARD_2);
+         ctx->input.ir_last_state = 0b011;
+         break;
+      default:
+         Motion_Forward(MOTOR_DUTY_FORWARD_3,MOTOR_DUTY_FORWARD_1);
+         ctx->input.ir_last_state = 0b001;
+         break;
+   }
+}

@@ -1,0 +1,26 @@
+#include "../../Config/config.h"
+
+/*************************************************
+                INIT
+    Cau hinh TRIS chung cho toan bo chan output
+    cua lop Driver/Output (LED, Motor, Servo).
+    Goi truoc LED_Init/Motor_Init/Servo_Init.
+**************************************************/
+
+void GPIO_Output_Init(void)
+{
+    // PORTC: LED_GREEN, LED_RED, ANT1, ANT2, BNT1, BNT2
+    set_tris_c(0b00000000);
+
+    // PORTD: SERVO
+    set_tris_d(0b00000000);
+}
+
+/*************************************************
+                WRITE PIN
+**************************************************/
+
+void GPIO_WritePin(int8 pin, int1 value)
+{
+    output_bit(pin, value);
+}
